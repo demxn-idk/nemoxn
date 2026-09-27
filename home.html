@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="animations.css">
+<link rel="stylesheet" href="scroller.css">
+
+<div id="status">Java - </div>
+
+<div id="cont">
+    <div class = "aligner">
+        <div id="main">Nemo<b id="n">XN</b></div>
+        <div class="subtext d" id="starter">Play the future</div>
+    </div>
+    <div id="community">
+        <button id="join" onclick="window.top.loadPage('join.html')">Join Now</button>
+        <button id="disc" data-url="https://discord.gg/zkcxyhah6y" onclick="window.top.location.href=this.dataset.url">Discord</button>
+    </div>
+
+    <div id="reviewcont">
+    </div>
+
+    <div id="credits">
+        <h1 id="creditst">Credits</h1>
+        <p id="ct">
+            ⋅ Website designed and developed by Potato73
+            <br>
+            ⋅ Server hosted by Nemo and DemXn
+        </p>
+    </div>
+</div>
+<style>
+    #starter {
+        opacity: 0;
+    }
+    html,body{
+        overflow: hidden !important;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
+</style>
+<script src="animations.js"></script>
+<script src="scroller.js"></script>
+<script>
+    async function start(){
+        setTimeout(async () => {
+            await show(document.getElementById("starter"));
+            await setTimeout(async () => {
+                await jumpOut(document.getElementById("join"),"1s");
+                //startBounce(document.getElementById("join"));   
+                await jumpOut(document.getElementById("disc"),"1s");
+                //startBounce(document.getElementById("disc"));   
+                await fadeIn(document.getElementById("reviewcont"),"1s");
+            }, 300);
+        },900);
+    }
+    start();
+
+    const d = 7;
+    const speed = 13;
+    const wait = 1300;
+    const e = document.getElementById("n");
+
+    var val = -5;
+
+    // reflection effect
+    setInterval(()=>{
+        e.style = "background: linear-gradient(to top right, rgba(255,0,0,1) 0%, rgba(255,0,0,1) "+(val-d)+"%, rgba(255,255,255,1) "+val+"%, rgba(255,0,0,1) "+(val+d)+"%, rgba(255,0,0,1) 100%);-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;"
+
+        val+=0.5;
+
+        if (val>100+d) {
+            setTimeout(()=>{
+                val = 0;
+            },wait);
+        }
+    },speed);
+
+    function colorReview(r,color){
+            if (color=="b") r.style="background-image: linear-gradient(to right bottom, rgba(0, 0, 255, 0.6), rgba(0, 0, 255, 0.4));";
+            if (color=="r") r.style="background-image: linear-gradient(to right bottom, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.4));";
+    }
+
+    function addReview(user,text,stars=5){
+        let r=document.createElement("div");
+        r.className="rcont";
+        document.getElementById("reviewcont").appendChild(r);
+
+        let sc=document.createElement("div");
+        sc.className="starcont";
+        r.appendChild(sc);
+
+        for (let i=0;i<stars;i++){
+            let s=document.createElement("img");
+            s.src="star.png";
+            s.className="star";
+            sc.appendChild(s);
+        }
+
+        let t=document.createElement("div");
+        t.innerHTML=text;
+        t.className="rtext";
+        r.appendChild(t);
+
+        let u=document.createElement("div");
+        u.innerHTML=" - "+user;
+        u.className="ruser";
+        r.appendChild(u);
+    }
+
+    function shuffleAndColor(){
+        let reviews=Array.from(document.getElementsByClassName("rcont"));
+        reviews.sort(() => Math.random() - 0.5);
+
+        let c="b";
+        let l=document.getElementsByClassName("rcont");
+        for (let i=0;i<l.length;i++){
+            colorReview(l[i],c);
+            if (c=="b"){
+                c="r";
+            } else {
+                c="b";
+            }
+        }
+    }
+
+    addReview("ItzMilo","I think this server is perfect, it's so easy to get gear and plugins aren't too crazy. The best part is that it's original and not just like DonutSMP.");
+
+    addReview("Zakfuh","This server is so good");
+
+    addReview("Jesse033","It's super cool and really fun to play on");
+
+    addReview("Arcane","This server is fire, you should play");
+
+    addReview("Soulzzz","This SMP is really fun to play on, and I genuinely like it. The gameplay feels smooth, the players are active and non-toxic, and theres always something to do. ");
+
+    addReview("Foggsxe","This server was one of my favorites. Every time I got on I had high expectations. This server has had some ups and downs but overall has a great community");
+
+    addReview("Sigmafady","Goated server, many thanks to nemo and the staff team for their work on the server");
+
+    addReview("Sigmafady","Goated server, many thanks to nemo and the staff team for their work on the server");
+
+    addReview("Potato.","Aamazing server, great community, fun seasons. Best all-around choice.");
+
+    shuffleAndColor();
+
+    let hovering = false;
+
+    const carousel = new InfiniteScrollCarousel(document.getElementById("reviewcont"), {
+        speed: 50,
+        pauseOnHover: false,
+        onMomentumEnd: () => {
+            if (hovering) {
+                setTimeout(()=>{
+                    carousel.pause();
+                },50);
+            }
+        }
+    });
+
+    document.getElementById("reviewcont").addEventListener('mouseenter', () => {
+        hovering = true;
+    });
+
+    document.getElementById("reviewcont").addEventListener('mouseleave', () => {
+        carousel.resume();
+        hovering = false;
+    });
+
+    async function canReachServer(url,type="java") {
+        return await new Promise((resolve) => {
+            let serverIp = "nemoxn.top";
+            fetch("https://api.mcstatus.io/v2/status/"+type+"/" + serverIp)
+            .then(response => {
+                if (!response.ok) {
+                    resolve(false);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.online) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+
+    async function statuses(){
+        if (await canReachServer("nemoxn.top")) {
+            document.getElementById("status").innerHTML+="Online";
+            document.getElementById("status").style.color="lightgreen";
+        } else {
+            document.getElementById("status").innerHTML+="Offline";
+            document.getElementById("status").style.color="red";
+        }
+    }
+    statuses();
+</script>

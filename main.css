@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Orbitron:wght@400..900&family=Sigmar&display=swap');
+
+#buttoncont {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 98.5%;
+    height: 7%;
+    justify-content: end;
+}
+
+html {
+    overflow-x:hidden;
+}
+
+#community {
+    margin-top: 4vh;
+}
+
+.aligner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    width: 100vw;
+    height: 56vh;
+    font-size: min(15vh,17vw);
+    font-family: "Alfa Slab One", serif;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 3px;
+}
+
+#cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.h {
+    opacity: 0;
+}
+
+.n {
+    display: none;
+}
+
+button {
+    border-radius: 15px;
+    font-size: 3vh;
+    padding-left: 2vh;
+    cursor: pointer;
+    padding-right: 2vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin: 0.2vw;
+    color: white; 
+    border: 0px;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    transition: 0.5s all;
+}
+
+button:hover {
+    font-size: 4vh;
+}
+
+.rcont {
+    height: 90%;
+    display: flex;
+    width: 35vh;
+    margin: 1vw;
+    color: white;
+    border: 0px solid;
+    border-radius: 5px;
+    flex-direction: column;
+    backdrop-filter: blur(1px);
+}
+
+#reviewcont{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5vh;
+    overflow: hidden;
+    height: 23vh;
+    opacity: 0;
+    justify-content: center;
+    align-items: start;
+}
+
+#about{
+    display: flex;
+    height: 80%;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Alfa Slab One", serif;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 3px;
+}
+
+#credits{
+    display: flex;
+    height: 80%;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Alfa Slab One", serif;
+    font-weight: 100;
+    font-style: normal;
+    letter-spacing: 3px;
+}
+
+#aboutt {
+    color: red;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 3vh;
+    opacity: 0;
+}
+
+#creditst {
+    color: blue;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 7vh;
+    opacity: 0;
+}
+
+#d {
+    background: rgba(255,0,0,0.3);
+    border-radius: 15px;
+    border: 1px solid red;
+    padding:0.5vw;
+    opacity: 0;
+    color: red;
+    font-size: 3vh;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#ct {
+    background: rgba(0,0,255,0.3);
+    border-radius: 15px;
+    border: 1px solid blue;
+    padding:0.5vw;
+    width: 100%;
+    opacity: 0;
+    color: blue;
+    font-size: 3vh;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+canvas {
+    transition: 0.5px all;
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:-3;
+}
+
+body {
+    margin: 0; 
+    padding: 0;
+    overflow-x: hidden;
+    background: transparent;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+#ips {
+    width: 70%;
+    height: 100%;
+    left: 15%;
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.s {
+    font-size: 2.4vh;
+    margin: 1px;
+    align-self: flex-start;
+}
+
+#pcj {
+    opacity: 0;
+    width: 100%;
+}
+
+#pce {
+    opacity: 0;
+    width: 100%;
+}
+
+#pcb {
+    opacity: 0;
+    width: 100%;
+}
+
+.t {
+    font-size: 6vh;
+    margin: 1px;
+    opacity: 0;
+}
+
+#main {
+    color: blue;
+    padding-top: 15vh;
+    text-shadow: 0 0 10px;
+}
+
+#n {
+    color: transparent;
+    text-shadow: 0 0 10px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtext {
+    font-size: 2vw;
+    background: linear-gradient(to right, rgba(0,0,255,1) 0%, rgba(255,0,0,1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#join {
+    background: blue;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    transform: scale(0%);
+}
+
+#disc {
+    background: red;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    transform: scale(0%);
+}
+
+#j {
+    border-color: blue;
+    background: rgba(0,0,255,0.1);
+    color: blue;
+}
+
+#e {
+    border-color: red;
+    background: rgba(255,0,0,0.1);
+    color: red;
+}
+
+#b {
+    border-color: blue;
+    background: rgba(0,0,255,0.1);
+    color: blue;
+}
+
+#status,#status2,#status3{
+    position: absolute;
+    top: 10vh;
+    left: 1vw;
+    color: white;
+    font-family: "Orbitron", sans-serif;
+}
+
+#status2 {
+  top: 12.5vh;
+}
+
+#status3 {
+  top: 15vh;
+}
+
+.starcont{
+    height: 15%;
+    overflow: hidden;
+    display: flex;
+    padding-top: 0.3vh;
+    align-items: center;
+    padding: 1vw;
+}
+
+.rtext{
+    margin-left: 3%;
+}
+
+.ruser{
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5%;
+}
+
+.star {
+    align-self: end;
+    height: 1.5vh;
+}
+
+#j:hover {
+    background: rgba(0,0,255,0.2);
+}
+
+#e:hover {
+    background: rgba(255,0,0,0.2);
+}
+
+#b:hover {
+    background: rgba(0,0,255,0.2);
+}
+
+#js {
+    color: rgba(0, 0, 255, 0.8);
+    opacity: 1;
+}
+
+#es {
+    color: rgba(255, 0, 0, 0.8);
+}
+
+#bs {
+    color: rgba(0, 0, 255, 0.8);
+    opacity: 1;
+}
+
+.c {
+    width: 100%;
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 20px;
+    color: rgb(192, 192, 192);
+    margin-bottom: 5vh;
+    padding-left:1vw;
+    font-size: 4vh;
+    padding:2vh;
+    border: 1px solid rgb(105, 105, 105);
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}

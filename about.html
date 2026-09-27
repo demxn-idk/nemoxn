@@ -1,0 +1,245 @@
+<script src="animations.js"></script>
+<script defer>
+    async function createPoint(text,paragraph,color,end=false){
+        var l=document.createElement("div");
+        l.className = "line i";
+        document.getElementById("cont").appendChild(l);
+        growFromTop(l,"0.5s");
+        
+        var p=document.createElement("div");
+        p.className = "point "+color;
+        document.getElementById("cont").appendChild(p);
+        await jumpOut(p,"0.5s");
+
+        var tw = document.createElement("div");
+        tw.className = "text-wrap";
+        document.getElementById("cont").appendChild(tw);
+
+        var t = document.createElement("div");
+        t.className = "text " + color;
+        t.textContent = text;
+        t.style.color="transparent";
+        tw.appendChild(t);
+        await growFromLeft(t, "0.2s");
+        t.style.color="";
+        await say(t,text,3);
+
+        var d=document.createElement("div");
+        d.className = "paragraph "+color;
+        document.getElementById("cont").appendChild(d);
+        say(d,paragraph);
+
+        if (!end){
+            var l=document.createElement("div");
+            l.className = "line "+color;
+            document.getElementById("cont").appendChild(l);
+            await growFromTop(l,"0.5s");
+        }
+
+        var h=document.createElement("div");
+        h.className = "hidden";
+        document.getElementById("cont").appendChild(h);
+    }
+
+    function isVisible(e){
+        if (!e) return false;
+        return (e.getBoundingClientRect().bottom <= (window.innerHeight || document.documentElement.clientHeight));
+    }
+
+    let points=[
+        {
+            text: "Nemo and Demxn met through Minecraft",
+            paragraph: "",
+            color: "r"
+        },
+        {
+            text: "Streak joined the server",
+            paragraph: "",
+            color: "b"
+        },
+        {
+            text: "NemoStreak was born",
+            paragraph: "",
+            color: "r"
+        },
+        {
+            text: "Streak disappeared and never returned",
+            paragraph: "",
+            color: "b"
+        },
+        {
+            text: "Demxn took Streak's place, and NemoXn officially started",
+            paragraph: "",
+            color: "r"
+        },
+        {
+            text: "Initially, a hosting service was used with poor uptime",
+            paragraph: "",
+            color: "b"
+        },
+        {
+            text: "The server was switched to use IntraceX hosting",
+            paragraph: "",
+            color: "r"
+        },
+        {
+            text: "IntraceX shut down, and NemoXn moved to Overnode",
+            paragraph: "",
+            color: "b"
+        },
+        {
+            text: "A proper server was built, with a spawn, ranks, and roles.",
+            paragraph: "",
+            color: "r"
+        },
+        {
+            text: "The community continued growing",
+            paragraph: "",
+            color: "b"
+        },
+        {
+            text: "NemoXn became what it is today",
+            paragraph: "",
+            color: "r"
+        }
+    ];
+
+    let inprogress=false;
+
+    async function showNext(){
+        let hl=document.getElementsByClassName("hidden");
+        let np=points[hl.length];
+
+        if (np){
+            await createPoint(np.text,np.paragraph,np.color,points[hl.length+1]==null);
+        }
+    }
+
+    async function check(){
+        if (inprogress) return;
+        let hl=document.getElementsByClassName("hidden");
+        let ce=hl[hl.length-1];
+        if (isVisible(ce) && !ce.hasAttribute("seen")){
+            inprogress = true;
+            await showNext();
+            ce.setAttribute("seen","true");
+            inprogress=false;
+
+            check();
+        }
+    }
+
+    document.addEventListener("scroll",check);
+
+    document.addEventListener("DOMContentLoaded",async ()=>{    
+        await jumpOut(document.getElementsByClassName("t")[0],"0.5s");
+        await fadeIn(document.getElementById("des"),"0.5s");
+        await jumpOut(document.getElementsByClassName("t")[1],"0.5s");
+        let fp=points[0];
+        await createPoint(fp.text,fp.paragraph,fp.color);
+        check();
+    });
+</script>
+<link rel="stylesheet" href="animations.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Orbitron:wght@400..900&family=Sigmar&display=swap');
+
+    .b{
+        background: blue !important;
+        color: blue;
+        border-bottom-color: blue !important;
+    } 
+
+    .i{
+        background: transparent !important;
+        color: transparent !important;
+        position: absolute;
+    }
+
+    .r{
+        background: red !important;
+        color: red;
+        border-bottom-color: red !important;
+    }
+
+    .point{
+        width: 5vh;
+        height: 5vh;
+        border-radius: 50%;
+        margin-left: 2.6vh;
+        opacity: 0;
+    }
+
+    .paragraph{
+        mask-image: none;
+        opacity: 1;
+        width: 80vw;
+        background: transparent !important;
+        font-size: 3vh;
+        height: 50vh;
+        position: absolute;
+        transform: translateX(8vh);
+    }
+
+    .line{
+        width: 0.5vh;
+        height: 5vw;
+        margin-left: 4.8vh;
+        opacity: 0;
+    }
+
+    .text{
+        /*width: 80vw;*/
+        background: transparent !important;
+        height: 3.3vh;
+        /*position: absolute;*/
+        border-bottom-width: 0.5vh !important;
+        /*translate: 7vh -5.9vh;*/
+        text-align: left;
+        border-bottom-style: solid;
+        font-size: 2.5vh;
+        padding-right: 1vh;
+        padding-left: 2vh;
+        opacity: 0;
+    }
+    .text-wrap {
+        position: absolute;
+        translate: 7vh -5.9vh;
+        transform-origin: left;
+    }
+    .t {
+        font-size: 4.5vh;
+        text-align: center;
+        margin: 1px;
+        opacity: 0;
+        color: blue;
+        padding-top: 10vh;
+        font-family: "Alfa Slab One", serif;
+        font-weight: 100;
+        font-style: normal;
+        letter-spacing: 3px;
+    }
+    #des {
+        opacity: 0;
+        color: blue;
+        margin: 2vw;
+        padding: 1vw;
+        font-size: 3vh;
+        background: rgba(0,0,255,0.3);
+        border-radius: 15px;
+    }
+</style>
+<div class="t">
+    Our Server
+</div>
+<div id="des">
+    NemoXn SMP delivers a refreshing, vanilla-style Minecraft experience that cuts through the clutter of pay-to-win mechanics and excessive
+     plugins. Offering a chill, semi-anarchy environment focused on Java survival, it welcomes both premium and cracked
+     players alike. Backed by a relaxed staff team and a non-toxic community, it's the ultimate 24/7 destination for players seeking
+     pure, unflitered survival gameplay, exciting events, and complete competitive freedom.
+</div>
+<div class="t" style="color:red;margin-bottom: 5vh;">
+    Timeline
+</div>
+<div id="cont"></div>

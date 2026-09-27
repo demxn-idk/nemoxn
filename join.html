@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="animations.css">
+
+<div id="cont">
+    <div id="ips">
+        <h1 class="t" id="java" style="color:blue;">Java</h1>
+        <div id="pcj">
+            <h1 class="s" id="js">Click to copy</h1>
+            <div class="c" id="j">nemoxn.top</div>
+        </div>
+    </div>
+
+    <div id="community">
+        <button id="join" data-url="https://discord.gg/zkcxyhah6y" onclick="window.top.location.href=this.dataset.url">Our community</button>
+    </div>
+</div>
+<style>
+    #starter {
+        opacity: 0;
+    }
+    html,body{
+        overflow: hidden !important;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
+</style>
+<script src="animations.js"></script>
+<script>
+    async function start(){
+        fadeIn(document.getElementById("java"), "1s");
+        await flyFromLeft(document.getElementById("pcj"), "1s");
+        await setTimeout(async() => {
+            await jumpOut(document.getElementById("join"),"1s");
+            startBounce(document.getElementById("join"));
+        }, 800);
+    }
+    start();
+
+    let jd = false;
+    const wait2 = 800;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("j").addEventListener("click", async ()=>{
+            if (!jd) {
+                jd = true;
+                await navigator.clipboard.writeText(document.getElementById("j").innerText);
+                document.getElementById("js").style.color = "rgba(0, 0, 255, 1)";
+                document.getElementById("js").innerText = "Copied!";
+
+                setTimeout(()=>{
+                    document.getElementById("js").style.color = "rgba(0, 0, 255, 0.8)";
+                    document.getElementById("js").innerText = "Click to copy";
+                    jd = false;
+                }, wait2);
+            }
+        });
+    });
+</script>
