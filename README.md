@@ -9,3 +9,4 @@ All AI generated code is clearly marked with comments saying it was generated, b
 
 Third party sources:
 Credit to elegs99 for carousel - https://github.com/elegs99/Open-Source-Grab-n-Drag-Infinite-Scroll-Carousel
+All of this work is made by dragon731013 he has full credit
